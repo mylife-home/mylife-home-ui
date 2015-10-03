@@ -11,8 +11,24 @@ const netConfig = {
   admin_channel : 'mylife-admin'
 };
 
+const adminDefinition = {
+  test: {
+    desc: 'Test desc',
+    impl: (w) => w('test!')
+  },
+  toto: {
+    desc: 'Toto desc',
+    children: {
+      subToto: {
+        desc: 'Sub toto desc',
+        impl: (w, m) => w('sub toto => ' + m),
+      }
+    }
+  }
+}
+
 var netClient = new Net.Client(netConfig, 'test-js');
-var adminClient = new Admin.Client(netConfig, 'test-js-admin');
+var adminClient = new Admin.Client(netConfig, 'test-js-admin', adminDefinition);
 
 process.on('SIGINT', () => async.parallel([
     (cb) => netClient.close(cb),
