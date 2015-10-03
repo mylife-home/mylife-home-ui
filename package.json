@@ -6,12 +6,13 @@
   "repository": "https://github.com/vincent-tr/mylife-home-ui",
   "author": "Vincent Trumpff",
   "dependencies": {
-    "irc": "*"
+    "irc"    : "*",
+    "log4js" :"*"
   },
   "devDependencies": {
-    "chai": "*",
-    "jshint": "*",
-    "mocha": "*"
+    "chai"   : "*",
+    "jshint" : "*",
+    "mocha"  : "*"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*.js"
