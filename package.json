@@ -6,9 +6,10 @@
   "repository": "https://github.com/vincent-tr/mylife-home-ui",
   "author": "Vincent Trumpff",
   "dependencies": {
-    "irc"    : "*",
-    "async"  : "*",
-    "log4js" : "*"
+    "irc"     : "*",
+    "async"   : "*",
+    "log4js"  : "*",
+    "express" : "*"
   },
   "devDependencies": {
     "chai"   : "*",
