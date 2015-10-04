@@ -3,6 +3,7 @@
 const async = require('async');
 const Net   = require('../lib/net');
 const Admin = require('../lib/admin');
+const Web   = require('../lib/web');
 
 const netConfig = {
   host          : 'rpi2-devel.mti-team2.dyndns.org',
@@ -29,8 +30,10 @@ const adminDefinition = {
 
 var netClient = new Net.Client(netConfig, 'test-js');
 var adminClient = new Admin.Client(netConfig, 'test-js-admin', adminDefinition);
+var webServer = new Web.Server(netClient.repository, 8001);
 
 process.on('SIGINT', () => async.parallel([
+    (cb) => webServer.close(cb),
     (cb) => netClient.close(cb),
     (cb) => adminClient.close(cb)
   ],
