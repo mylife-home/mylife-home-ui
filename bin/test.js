@@ -29,12 +29,18 @@ const adminDefinition = {
   }
 };
 
+function sessionCreator(socket) {
+  console.log('connected');
+  socket.on('disconnect', () => console.log('disconnected'));
+  socket.on('message', (data) => console.log('data:', data));
+}
+
 var netClient = new Net.Client(netConfig, 'test-js');
 var netRepository = new Net.Repository(netClient);
 var netJPacketManager = new Net.JPacketManager(netClient);
 
 var adminClient = new Admin.Client(netConfig, 'test-js-admin', adminDefinition);
-var webServer = new Web.Server(netRepository, netJPacketManager, 8001);
+var webServer = new Web.Server(netRepository, netJPacketManager, sessionCreator, 8001);
 
 process.on('SIGINT', () => async.parallel([
     (cb) => webServer.close(cb),
