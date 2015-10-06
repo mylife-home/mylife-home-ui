@@ -27,8 +27,17 @@
         $('#m').val('');
         return false;
       });
-      socket.on('message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+      socket.on('state', function(data){
+        $('#messages').append($('<li>').text('state:'+JSON.stringify(data)));
+      });
+      socket.on('add', function(data){
+        $('#messages').append($('<li>').text('add:'+JSON.stringify(data)));
+      });
+      socket.on('remove', function(data){
+        $('#messages').append($('<li>').text('remove:'+JSON.stringify(data)));
+      });
+      socket.on('change', function(data){
+        $('#messages').append($('<li>').text('change:'+JSON.stringify(data)));
       });
     </script>
   </body>
