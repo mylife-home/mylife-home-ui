@@ -1,0 +1,15 @@
+# TODO: deploy and test
+# TODO: pid ?
+
+[Service]
+ExecStart=node [lib/dir]/bin/server.js [conf/dir]/ui.json
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mylife-home-ui
+User=mylife-home
+Group=mylife-home
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
