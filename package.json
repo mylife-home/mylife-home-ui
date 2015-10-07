@@ -13,10 +13,11 @@
     "body-parser" : "*"
   },
   "devDependencies": {
-    "bower"  : "*",
-    "chai"   : "*",
-    "jshint" : "*",
-    "mocha"  : "*"
+    "bower"            : "*",
+    "chai"             : "*",
+    "jshint"           : "*",
+    "mocha"            : "*",
+    "systemjs-builder" : "*"
   },
   "scripts": {
     "test"        : "./node_modules/.bin/mocha test/*.js",
