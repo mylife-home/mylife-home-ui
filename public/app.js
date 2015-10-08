@@ -2,6 +2,9 @@
 
 import 'angular';
 import 'angular-route';
+import 'socket.io';
+import './components/data.js';
+
 import './components/version/version.js';
 import './components/version/interpolate-filter.js';
 import './components/version/version-directive.js';
@@ -9,7 +12,7 @@ import './view1/view1.js';
 import './view2/view2.js';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('mylife-home-ui', [
   'ngRoute',
   'myApp.view1',
   'myApp.view2',
