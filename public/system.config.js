@@ -6,6 +6,6 @@ System.config({
   paths: {
     'angular': 'bower_components/angular/angular.js',
     'angular-route': 'bower_components/angular-route/angular-route.js',
-    'socket.io': 'bower_components/socket.io-client/socket.io.js'
+    'socket.io-client': 'bower_components/socket.io-client/socket.io.js'
   }
 });
