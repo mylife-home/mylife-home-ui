@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mylife-home-ui.window', ['mylife-home-ui.data'])
+angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data'])
 
 .factory('windowFactory', function(resources, socket) {
   return function(id, cb) {
@@ -18,13 +18,16 @@ angular.module('mylife-home-ui.window', ['mylife-home-ui.data'])
 
 .factory('windowManager', function(resources, windowFactory) {
   const manager = {
-    defaultWindow: null
+    defaultWindowId: null
   };
 
-  resources.load('default_window', function(data) {
-    console.log(data);
-    manager.defaultWindow = data;
-  })
+  manager.init = function(done) {
+    resources.load('default_window', function(data) {
+      console.log(data);
+      manager.defaultWindowId = data;
+      done();
+    });
+  };
 
   return manager;
 })

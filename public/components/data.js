@@ -2,7 +2,7 @@
 
 import io from 'socket.io-client';
 
-angular.module('mylife-home-ui.data', [])
+angular.module('mylife-home-ui.components.data', [])
 
 .factory('resources', function($http) {
   return {
