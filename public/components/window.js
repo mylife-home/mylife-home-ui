@@ -182,8 +182,8 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
 
           height          : spec.height,
           width           : spec.width,
-          x               : 0, // TODO
-          y               : 0, // TODO
+          x               : 0, // TODO: ratio
+          y               : 0, // TODO: ratio
           primaryAction   : loadAction(spec.primary_action),
           secondaryAction : loadAction(spec.secondary_action),
           display         : null,
@@ -202,6 +202,8 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         spec       : spec,
         id         : spec.id,
 
+        height          : spec.height, // TODO: handle undefined
+        width           : spec.width, // TODO: handle undefined
         background : null,
         controls   : []
       };
