@@ -4,60 +4,9 @@ import async from 'async';
 
 angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data'])
 
-.factory('windowFactory', function(resources, socket) {
-  return function(windowId, done) {
+.factory('windowManager', function(resources, socket) {
 
-    resources.load('window.' + windowId, function(data) {
-
-      const loaders = [];
-
-      function loadImage(imageId, setter) {
-        loaders.push((done) => {
-          resources.load('image.' + imageId, function(data) {
-            setter(data);
-            done();
-          });
-        });
-      }
-
-      const spec = JSON.parse(data).window;
-
-      const w = {
-        spec       : spec,
-        id         : spec.id,
-
-        background : null,
-        controls   : []
-      };
-
-      if(w.spec.background_resource_id) {
-        loadImage(w.spec.background_resource_id, (img) => w.background = 'data:image/png;base64,' + img);
-      }
-
-      for(let ctrlSpec of spec.controls) {
-        const c = {
-          spec : ctrlSpec,
-          id   : ctrlSpec.id,
-
-          height          : ctrlSpec.height,
-          width           : ctrlSpec.width,
-          x               : 0, // TODO
-          y               : 0, // TODO
-          primaryAction   : null, // TODO
-          secondaryAction : null, // TODO
-          display         : null, // TODO
-          text            : null // TODO
-        };
-
-        w.controls.push(c);
-      }
-
-      async.parallel(loaders, () => done(w));
-    });
-  };
-})
-
-.factory('windowManager', function(resources, windowFactory) {
+  // ------------- Window management part ---------------------
 
   const cachedWindows = { };
 
@@ -97,6 +46,102 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       manager.windows.length = 0;
       manager.windows.push(w);
       done(w);
+    });
+  };
+
+  // ------------- Window factory part ---------------------
+
+  function windowFactory(windowId, done) {
+
+    resources.load('window.' + windowId, function(data) {
+
+      const loaders = [];
+
+      function loadImage(imageId, setter) {
+        loaders.push((done) => {
+          resources.load('image.' + imageId, function(data) {
+            setter(data);
+            done();
+          });
+        });
+      }
+
+      function loadAction(spec) {
+        if(!spec) { spec = null; }
+
+        const a = {
+          spec : spec
+        };
+
+        if(spec) {
+          const cspec = spec.component;
+          if(cspec) {
+            a.execute = () => {
+              socket.emit('action', {
+                id   : cspec.component_id,
+                name : cspec.component_action
+                //args :[]
+              });
+            };
+          }
+
+          const wspec = spec.window;
+          if(wspec) {
+            a.execute = function() {
+              if(wspec.popup) {
+                windowFactory.popup(wspec.id, () => { });
+              } else {
+                windowFactory.change(wspec.id, () => { });
+              }
+            };
+          }
+        }
+
+        if(!a.execute) {
+          a.execute = () => { };
+        }
+
+        return a;
+      }
+
+      function loadControl(spec) {
+        const c = {
+          spec : ctrlSpec,
+          id   : ctrlSpec.id,
+
+          height          : ctrlSpec.height,
+          width           : ctrlSpec.width,
+          x               : 0, // TODO
+          y               : 0, // TODO
+          primaryAction   : loadAction(spec.primary_action),
+          secondaryAction : loadAction(spec.secondary_action),
+          display         : null, // TODO
+          text            : null // TODO
+        };
+
+        return c;
+      }
+
+      const spec = JSON.parse(data).window;
+
+      const w = {
+        spec       : spec,
+        id         : spec.id,
+
+        background : null,
+        controls   : []
+      };
+
+      if(w.spec.background_resource_id) {
+        loadImage(w.spec.background_resource_id, (img) => w.background = 'data:image/png;base64,' + img);
+      }
+
+      for(let ctrlSpec of spec.controls) {
+        const c = loadControl(ctrlSpec);
+        w.controls.push(c);
+      }
+
+      async.parallel(loaders, () => done(w));
     });
   };
 
