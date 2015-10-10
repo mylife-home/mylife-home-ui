@@ -2,9 +2,9 @@
 
 import async from 'async';
 
-angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data'])
+angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data', 'mylife-home-ui.components.repository'])
 
-.factory('windowManager', function(resources, socket) {
+.factory('windowManager', function(resources, socket, repository) {
 
   // ------------- Window management part ---------------------
 
@@ -104,20 +104,89 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         return a;
       }
 
+      function loadDisplay(spec) {
+        if(!spec) { return () => null; }
+
+        const images = {};
+
+        function loadImageLocal(key) {
+          if(images.hasOwnProperty(key)) { return; } // already loading
+          images[key] = null;
+          loadImage(key, (img) => images[key] = img);
+        }
+
+        if(spec.default_resource_id) {
+          loadImageLocal(spec.default_resource_id);
+        }
+
+        for(let item of spec.map) {
+          loadImageLocal(item.resource_id);
+        }
+
+        let itemFinder;
+        if(!spec.map.length) {
+          itemFinder = () => null;
+        }
+        else if(spec.map[0].hasOwnProperty('value')) {
+          itemFinder = (value) => {
+            for(let item of spec.map) {
+              if(item.value === value) {
+                return item;
+              }
+            }
+            return null;
+          };
+        }
+        else {
+          itemFinder = (value) => {
+            value = parseInt(value);
+            for(let item of spec.map) {
+              if(item.min <= value && value <= item.max) {
+                return item;
+              }
+            }
+            return null;
+          };
+        }
+
+        return () => {
+          let value;
+          const obj = repository.get(spec.component_id);
+          if(obj) { value = obj[spec.component_attribute]; }
+          const item = value ? null : itemFinder(value);
+          if(item) {
+            return resources[item.resource_id];
+          }
+          return resources[spec.default_resource_id];
+        };
+      }
+
+      function loadText(spec) {
+        if(!spec) { return () => null; }
+
+        return () => {
+          // TODO
+          return spec.format;
+        };
+      }
+
       function loadControl(spec) {
         const c = {
-          spec : ctrlSpec,
-          id   : ctrlSpec.id,
+          spec : spec,
+          id   : spec.id,
 
-          height          : ctrlSpec.height,
-          width           : ctrlSpec.width,
+          height          : spec.height,
+          width           : spec.width,
           x               : 0, // TODO
           y               : 0, // TODO
           primaryAction   : loadAction(spec.primary_action),
           secondaryAction : loadAction(spec.secondary_action),
-          display         : null, // TODO
-          text            : null // TODO
+          display         : null,
+          text            : null
         };
+
+        Object.defineProperty(c, 'display', { get : loadDisplay(spec.display) });
+        Object.defineProperty(c, 'text', { get : loadText(spec.text) });
 
         return c;
       }
@@ -143,7 +212,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
 
       async.parallel(loaders, () => done(w));
     });
-  };
+  }
 
   return manager;
 });

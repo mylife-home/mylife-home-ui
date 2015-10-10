@@ -3,6 +3,7 @@
 import 'angular';
 import 'angular-route';
 import './components/data.js';
+import './components/repository.js';
 import './components/window.js';
 import './views/window.js';
 
