@@ -60,7 +60,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       function loadImage(imageId, setter) {
         loaders.push((done) => {
           resources.load('image.' + imageId, function(data) {
-            setter(data);
+            setter('data:image/png;base64,' + data);
             done();
           });
         });
@@ -155,9 +155,9 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
           if(obj) { value = obj[spec.component_attribute]; }
           const item = value ? null : itemFinder(value);
           if(item) {
-            return resources[item.resource_id];
+            return images[item.resource_id];
           }
-          return resources[spec.default_resource_id];
+          return images[spec.default_resource_id];
         };
       }
 
@@ -202,7 +202,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       };
 
       if(w.spec.background_resource_id) {
-        loadImage(w.spec.background_resource_id, (img) => w.background = 'data:image/png;base64,' + img);
+        loadImage(w.spec.background_resource_id, (img) => w.background = img);
       }
 
       for(let ctrlSpec of spec.controls) {
