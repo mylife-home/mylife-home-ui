@@ -7,7 +7,7 @@ angular.module('mylife-home-ui.components.data', [])
 .factory('resources', function($http) {
   return {
     load: function(name, cb) {
-      $http.get('/resources/get/' + name, { cache: true })
+      $http.get('/resources/get/' + name, { cache : true })
         .then(function(res) {
           cb(res.data);
         }, function(error) {
