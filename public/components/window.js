@@ -49,6 +49,11 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
     });
   };
 
+  manager.close = function() {
+    if(manager.windows.length <= 1) { return; } // popup only
+    manager.windows.pop();
+  }
+
   // ------------- Window factory part ---------------------
 
   function windowFactory(windowId, done) {
@@ -89,9 +94,9 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
           if(wspec) {
             a.execute = function() {
               if(wspec.popup) {
-                windowFactory.popup(wspec.id, () => { });
+                manager.popup(wspec.id, () => { });
               } else {
-                windowFactory.change(wspec.id, () => { });
+                manager.change(wspec.id, () => { });
               }
             };
           }
@@ -141,7 +146,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
           itemFinder = (value) => {
             value = parseInt(value);
             for(let item of spec.map) {
-              if(item.min <= value && value <= item.max) {
+              if(item.min <= value && value <= item.max) { // TODO: check correct naming
                 return item;
               }
             }
@@ -165,7 +170,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         if(!spec) { return () => null; }
 
         return () => {
-          // TODO
+          // TODO use context and format (check naming)
           return spec.format;
         };
       }
