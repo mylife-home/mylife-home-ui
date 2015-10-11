@@ -4,7 +4,7 @@ import async from 'async';
 
 angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data', 'mylife-home-ui.components.repository'])
 
-.factory('windowManager', function(resources, socket, repository) {
+.factory('windowManager', function(resources, socket, repository, $location) {
 
   // ------------- Window management part ---------------------
 
@@ -96,7 +96,8 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
               if(wspec.popup) {
                 manager.popup(wspec.id, () => { });
               } else {
-                manager.change(wspec.id, () => { });
+                //manager.change(wspec.id, () => { });
+                $location.url('/' + wspec.id);
               }
             };
           }
