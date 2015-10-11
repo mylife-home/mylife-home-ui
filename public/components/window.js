@@ -222,7 +222,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
           let value;
           const obj = repository.get(spec.component_id);
           if(obj) { value = obj[spec.component_attribute]; }
-          const item = value ? null : itemFinder(value);
+          const item = value === undefined ? null : itemFinder(value);
           if(item) {
             return images[item.resource_id];
           }
