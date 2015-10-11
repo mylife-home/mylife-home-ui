@@ -17,6 +17,20 @@ angular.module('mylife-home-ui.components.data', [])
   };
 })
 
-.factory('socket', function() {
-  return io();
+.factory('socket', function($rootScope) {
+
+  const socket = io();
+
+  return {
+    // wrap for $apply
+    on: function(name, cb) {
+      socket.on(name, (data) => {
+        $rootScope.$apply(() => {
+          cb(data);
+        });
+      });
+    },
+
+    emit: socket.emit.bind(socket)
+  };
 });
