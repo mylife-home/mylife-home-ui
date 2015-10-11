@@ -170,9 +170,27 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       function loadText(spec) {
         if(!spec) { return () => null; }
 
+        function valueGetter(item) {
+          return () => {
+            let value;
+            const obj = repository.get(item.component_id);
+            if(obj) { value = obj[item.component_attribute]; }
+            return value || '';
+          };
+        }
+
+        const context = [];
+
+        for(let item of spec.context) {
+          context.push({ id : '#' + item.id + '#', getter : valueGetter(item) });
+        }
+
         return () => {
-          // TODO use context and format (check naming)
-          return spec.format;
+          let text = spec.format;
+          for(let item of context) {
+            text = text.replace(new RegExp(item.id, 'g'), item.getter());
+          }
+          return text;
         };
       }
 
