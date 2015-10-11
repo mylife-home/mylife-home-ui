@@ -115,7 +115,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
   manager.close = function() {
     if(manager.windows.length <= 1) { return; } // popup only
     manager.windows.pop();
-  }
+  };
 
   // ------------- Window factory part ---------------------
 
@@ -210,7 +210,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
           itemFinder = (value) => {
             value = parseInt(value);
             for(let item of spec.map) {
-              if(item.min <= value && value <= item.max) { // TODO: check correct naming
+              if(item.min <= value && value <= item.max) {
                 return item;
               }
             }
