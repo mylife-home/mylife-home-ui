@@ -17,3 +17,5 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
     $scope.close = () => windowManager.close();
   });
 });
+
+// TODO: get old 'click handling' code (mylife home ui web old)
