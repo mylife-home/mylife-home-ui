@@ -1,5 +1,68 @@
 'use strict';
 
+/*
+
+Format données fenêtre
+{
+  "id" : "w1",
+  "height" : "0.5", //en fraction de la taille de l'écran, uniquement utilisé si popup (sinon fullscreen)
+  "width" : "0.25", //en fraction de la taille de l'écran, uniquement utilisé si popup (sinon fullscreen)
+  "background_resource_id" : "bg_res",
+  "style": "données css", // facultatif
+  "controls" : [
+    {
+      "id": "c1",
+      "x" : "0.23", // x du milieu du control, en fraction de la taille de la fenêtre
+      "y" : "0.27", // y du milieu du control, en fraction de la taille de la fenêtre
+      "height" : "12", // px, facultatif
+      "width" : "12", // px, facultatif
+      "style": "données css", // facultatif
+
+      "display": { // mutuellement exclusif avec text
+        "default_resource_id": "res_id", // image par défaut
+        "component_id": "obj_id", // si non défini, pas de modif de l'image
+        "component_attribute": "attr",
+        "map": [
+          {
+            "value": "enum_value", // pour les attributs enum
+            "min": "range_min", // pour les attributs range
+            "max": "range_max", // pour les attributs range
+            "resource_id": "res_id"
+          },
+          ...
+        ]
+      }
+
+      "text": { // mutuellement exclusif avec display
+        "format": "toto, avec des #data_id#", // toto en javascript, avec des valeur_de_data_id
+        "context": [
+          {
+                    "component_id": "cid",
+                    "component_attribute": "attr",
+                    "id": "data_id"
+          }
+        ]
+      },
+
+      "primary_action": {
+        "window": { // soit ca soit component
+          "id": "wid",
+          "popup": "true|false",
+        }
+        "component": { // soit ca soit window
+          "component_id": "obj_id",
+          "component_action": "obj_action"
+        }
+      }
+
+      "secondary_action": {} // pareil que primary
+    },
+    ...
+  ]
+}
+
+*/
+
 import async from 'async';
 
 angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data', 'mylife-home-ui.components.repository'])
