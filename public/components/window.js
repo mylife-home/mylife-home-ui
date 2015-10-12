@@ -76,7 +76,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
   const manager = {
     defaultWindowId : null,
     windows         : [],
-    loading         : false
+    loading         : false // TODO: does not work ?!
   };
 
   function load(windowId, done) {
@@ -125,6 +125,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
 
       const loaders = [];
 
+      // TODO: image map with cb to avoid loading several times the same image
       function loadImage(imageId, setter) {
         loaders.push((done) => {
           resources.load('image.' + imageId, function(data) {
