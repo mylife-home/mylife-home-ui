@@ -124,15 +124,24 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
     resources.load('window.' + windowId, function(data) {
 
       const loaders = [];
+      const imageLoaders = {};
 
       // TODO: image map with cb to avoid loading several times the same image
       function loadImage(imageId, setter) {
-        loaders.push((done) => {
-          resources.load('image.' + imageId, function(data) {
-            setter('data:image/png;base64,' + data);
-            done();
+        let setters = imageLoaders[imageId];
+        if(!setters) {
+          setters = imageLoaders[imageId] = [];
+          loaders.push((done) => {
+            resources.load('image.' + imageId, function(data) {
+              data = 'data:image/png;base64,' + data;
+              for(let setter of setters) {
+                setter(data);
+              }
+              done();
+            });
           });
-        });
+        }
+        setters.push(setter);
       }
 
       function loadAction(spec) {
