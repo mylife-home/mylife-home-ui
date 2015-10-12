@@ -2,6 +2,7 @@
 
 import 'angular';
 import 'angular-route';
+import 'angular-bootstrap';
 import './components/data.js';
 import './components/repository.js';
 import './components/window.js';
@@ -10,6 +11,7 @@ import './views/window.js';
 
 angular.module('mylife-home-ui', [
   'ngRoute',
+  'ui.bootstrap',
   'mylife-home-ui.components.data',
   'mylife-home-ui.components.window',
   'mylife-home-ui.components.input',
