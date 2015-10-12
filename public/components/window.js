@@ -125,7 +125,6 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       const loaders = [];
       const imageLoaders = {};
 
-      // TODO: image map with cb to avoid loading several times the same image
       function loadImage(imageId, setter) {
         let setters = imageLoaders[imageId];
         if(!setters) {
