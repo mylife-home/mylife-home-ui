@@ -2,7 +2,7 @@
 <button ng-click="manager.close()">popup close</button>
 <ul>
     <li ng-repeat="window in manager.windows">
-    <p>Window {{ window.id }}</p>
+    <p>Window {{ window.id }}; active: {{ $last }}</p>
     <img src="{{ window.background }}">
     <ul>
       <li ng-repeat="control in window.controls">
