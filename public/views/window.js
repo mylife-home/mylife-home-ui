@@ -15,4 +15,3 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
 });
 
 // TODO: get old 'click handling' code (mylife home ui web old)
-// TODO: add something to know what window is on top and what are under others
