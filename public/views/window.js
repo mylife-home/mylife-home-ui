@@ -13,5 +13,3 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
   $scope.manager = windowManager;
   windowManager.change($routeParams.id, () => {});
 });
-
-// TODO: get old 'click handling' code (mylife home ui web old)
