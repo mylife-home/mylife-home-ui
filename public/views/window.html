@@ -1,7 +1,7 @@
-<p>loading: {{ loading }}</p>
-<button ng-click="close()">popup close</button>
+<p>loading: {{ manager.loading }}</p>
+<button ng-click="manager.close()">popup close</button>
 <ul>
-    <li ng-repeat="window in windows">
+    <li ng-repeat="window in manager.windows">
     <p>Window {{ window.id }}</p>
     <img src="{{ window.background }}">
     <ul>

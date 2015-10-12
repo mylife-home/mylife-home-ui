@@ -76,18 +76,24 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
   const manager = {
     defaultWindowId : null,
     windows         : [],
-    loading         : false // TODO: does not work ?!
+    loading         : false
   };
 
   function load(windowId, done) {
     const cw = cachedWindows[windowId];
     if(cw) { return done(cw); }
-
+console.log('loading = true');
     manager.loading = true;
     return windowFactory(windowId, function(w) {
+console.log('loading = false');
       manager.loading = false;
       return done(w);
     });
+  }
+
+  manager.testLoading = function() {
+    console.log('test loading');
+    return manager.loading;
   }
 
   manager.init = function(done) {

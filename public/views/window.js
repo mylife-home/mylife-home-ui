@@ -10,12 +10,9 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
 }])
 
 .controller('windowController', function($routeParams, $scope, windowManager) {
-  $scope.loading = windowManager.loading;
-  windowManager.change($routeParams.id, () => {
-    console.log(windowManager.windows);
-    $scope.windows = windowManager.windows;
-    $scope.close = () => windowManager.close();
-  });
+  $scope.manager = windowManager;
+  console.log(windowManager);
+  windowManager.change($routeParams.id, () => {});
 });
 
 // TODO: get old 'click handling' code (mylife home ui web old)
