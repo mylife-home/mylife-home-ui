@@ -9,8 +9,13 @@
         {{ control.id }}
         text: {{ control.text }}
         display: <img src="{{ control.display }}">
-        <button ng-click="control.primaryAction.execute()" >p</button>
-        <button ng-click="control.secondaryAction.execute()" >s</button>
+        <button input-handler="{
+          's': control.primaryAction.execute,
+          'l': control.secondaryAction.execute,
+          'ss': control.secondaryAction.execute
+        }"></button>
+        <!-- <button ng-click="control.primaryAction.execute()" >p</button> -->
+        <!-- <button ng-click="control.secondaryAction.execute()" >s</button> -->
       </li>
     </ul>
   </li>
