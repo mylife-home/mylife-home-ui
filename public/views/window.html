@@ -6,14 +6,16 @@
     <img src="{{ window.background }}">
     <ul>
       <li ng-repeat="control in window.controls">
-        {{ control.id }}
-        text: {{ control.text }}
-        display: <img src="{{ control.display }}">
-        <button input-handler="{
+        <button title="{{ control.id }}"" class="btn" input-handler="{
           's': control.primaryAction.execute,
           'l': control.secondaryAction.execute,
           'ss': control.secondaryAction.execute
-        }"></button>
+        }">
+          <div>
+            <img ng-show="control.display" src="{{ control.display }}">
+            <span ng-show="control.text">{{ control.text }}</span>
+          <div>
+        </button>
         <!-- <button ng-click="control.primaryAction.execute()" >p</button> -->
         <!-- <button ng-click="control.secondaryAction.execute()" >s</button> -->
       </li>
