@@ -90,8 +90,10 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
   }
 
   manager.init = function(done) {
+    manager.loading = true;
     resources.load('default_window', function(data) {
       manager.defaultWindowId = data;
+      manager.loading = false;
       done();
     });
   };
