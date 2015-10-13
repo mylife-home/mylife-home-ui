@@ -8,18 +8,20 @@
       <li ng-repeat="control in window.controls">
         <div title="{{ control.id }}"
              ng-class="{
-               'control-button': utils.isControlActive(control),
-               'control-inactive': !utils.isControlActive(control)
+               'mylife-control-button': utils.isControlActive(control),
+               'mylife-control-inactive': !utils.isControlActive(control)
+             }"
+             ng-style="{
+               'height': control.height + 'px',
+               'width': control.width + 'px'
              }"
              input-handler="{
                's': control.primaryAction.execute,
                'l': control.secondaryAction.execute,
                'ss': control.secondaryAction.execute
              }">
-          <div>
-            <img ng-show="control.display" src="{{ control.display }}">
-            <span ng-show="control.text">{{ control.text }}</span>
-          <div>
+          <img ng-show="control.display" src="{{ control.display }}">
+          <p ng-show="control.text">{{ control.text }}</p>
         </div>
       </li>
     </ul>

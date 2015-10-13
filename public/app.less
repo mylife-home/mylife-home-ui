@@ -1,9 +1,28 @@
 @import "bower_components/bootstrap/less/bootstrap.less";
 
-.control-button {
-  .btn();
-  .btn-default();
+.mylife-control {
+
+  padding: 2px;
+  display: table-cell;
+  vertical-align: middle;
+
+  > img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  > p {
+    margin: auto;
+  }
 }
 
-.control-inactive {
+.mylife-control-button {
+  .btn();
+  .btn-default();
+
+  .mylife-control();
+}
+
+.mylife-control-inactive {
+  .mylife-control();
 }
