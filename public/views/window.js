@@ -10,6 +10,12 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
 }])
 
 .controller('windowController', function($routeParams, $scope, windowManager) {
-  $scope.manager = windowManager;
   windowManager.change($routeParams.id, () => {});
+  $scope.manager = windowManager;
+
+  $scope.utils = {
+    isControlActive: function(control) {
+      return control.primaryAction.spec || control.secondaryAction.spec;
+    }
+  }
 });
