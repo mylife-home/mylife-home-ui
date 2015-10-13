@@ -6,21 +6,22 @@
   "repository": "https://github.com/vincent-tr/mylife-home-ui",
   "author": "Vincent Trumpff",
   "dependencies": {
-    "irc"         : "*",
-    "async"       : "*",
-    "log4js"      : "*",
-    "express"     : "*",
-    "body-parser" : "*"
+    "async": "*",
+    "body-parser": "*",
+    "express": "*",
+    "irc": "*",
+    "less-middleware": "^2.0.1",
+    "log4js": "*"
   },
   "devDependencies": {
-    "bower"            : "*",
-    "chai"             : "*",
-    "jshint"           : "*",
-    "mocha"            : "*",
-    "systemjs-builder" : "*"
+    "bower": "*",
+    "chai": "*",
+    "jshint": "*",
+    "mocha": "*",
+    "systemjs-builder": "*"
   },
   "scripts": {
-    "test"        : "./node_modules/.bin/mocha test/*.js",
-    "postinstall" : "bower install"
+    "test": "./node_modules/.bin/mocha test/*.js",
+    "postinstall": "bower install"
   }
 }
