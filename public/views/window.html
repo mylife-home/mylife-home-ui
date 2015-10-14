@@ -3,11 +3,13 @@
 </div>
 <div ng-repeat="window in manager.windows">
 
+  <!-- TODO: size -->
   <div ng-show="$first" title="{{ window.id }}">
     <div class="mylife-overlay" ng-show="!$last"></div>
     <div ng-include="'views/window-content.html'"></div>
   </div>
 
+  <!-- TODO: size and position -->
   <div ng-show="!$first" class="modal-content" title="{{ window.id }}">
     <div class="mylife-overlay" ng-show="!$last"></div>
     <div class="modal-header">
