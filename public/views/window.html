@@ -1,6 +1,6 @@
 <p>loading: {{ manager.loading }}</p>
 <button ng-click="manager.close()">popup close</button>
-<div class="mylife-overlay">
+<div class="mylife-overlay" ng-show="manager.loading">
   <img src="images/spinner.gif">
 </div>
 <ul>
