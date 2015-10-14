@@ -1,32 +1,21 @@
-<p>loading: {{ manager.loading }}</p>
-<button ng-click="manager.close()">popup close</button>
 <div class="mylife-overlay" ng-show="manager.loading">
   <img src="images/spinner.gif">
 </div>
-<ul>
-    <li ng-repeat="window in manager.windows">
-    <p>Window {{ window.id }}; active: {{ $last }}</p>
-    <img src="{{ window.background }}">
-    <ul>
-      <li ng-repeat="control in window.controls">
-        <div title="{{ control.id }}"
-             ng-class="{
-               'mylife-control-button': utils.isControlActive(control),
-               'mylife-control-inactive': !utils.isControlActive(control)
-             }"
-             ng-style="{
-               'height': control.height + 'px',
-               'width': control.width + 'px'
-             }"
-             input-handler="{
-               's': control.primaryAction.execute,
-               'l': control.secondaryAction.execute,
-               'ss': control.secondaryAction.execute
-             }">
-          <img ng-show="control.display" src="{{ control.display }}">
-          <p ng-show="control.text">{{ control.text }}</p>
-        </div>
-      </li>
-    </ul>
-  </li>
-</ul>
+<div ng-repeat="window in manager.windows">
+
+  <div ng-show="$first" title="{{ window.id }}">
+    <div class="mylife-overlay" ng-show="!$last"></div>
+    <div ng-include="'views/window-content.html'"></div>
+  </div>
+
+  <div ng-show="!$first" class="modal-content" title="{{ window.id }}">
+    <div class="mylife-overlay" ng-show="!$last"></div>
+    <div class="modal-header">
+      <button ng-click="manager.close()" class="close">x</button>
+      <h4 class="modal-title">&nbsp;</h4>
+    </div>
+    <div class="modal-body">
+      <div ng-include="'views/window-content.html'"></div>
+    </div>
+  </div>
+</div>
