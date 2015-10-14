@@ -1,5 +1,8 @@
 <p>loading: {{ manager.loading }}</p>
 <button ng-click="manager.close()">popup close</button>
+<div class="mylife-overlay">
+  <img src="images/spinner.gif">
+</div>
 <ul>
     <li ng-repeat="window in manager.windows">
     <p>Window {{ window.id }}; active: {{ $last }}</p>
