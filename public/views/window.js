@@ -11,6 +11,7 @@ angular.module('mylife-home-ui.views.window', ['ngRoute', 'mylife-home-ui.compon
 
 .controller('windowController', function($routeParams, $scope, windowManager) {
   windowManager.change($routeParams.id, () => {});
+  console.log(windowManager);
   $scope.manager = windowManager;
 
   $scope.utils = {
