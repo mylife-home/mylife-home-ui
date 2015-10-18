@@ -2,7 +2,7 @@
 
 angular.module('mylife-home-ui.components.layout', [])
 
-.directive('size', function($parse) {
+.directive('size', ['internals.layoutInitFactory', function() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs){
@@ -13,9 +13,9 @@ angular.module('mylife-home-ui.components.layout', [])
       }, true);
     }
   };
-})
+}])
 
-.directive('position', function($parse) {
+.directive('position', ['internals.layoutInitFactory', function() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs){
@@ -26,5 +26,11 @@ angular.module('mylife-home-ui.components.layout', [])
       }, true);
     }
   };
-});
+}])
 
+.factory('internals.layoutInitFactory', function($window, $rootScope) {
+  angular.element($window).bind('resize', () => {
+    $rootScope.$digest();
+  });
+  return {};
+});
