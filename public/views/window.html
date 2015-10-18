@@ -8,14 +8,16 @@
     <div ng-include="'views/window-content.html'" size="window.size" class="mylife-window-container"></div>
   </div>
 
-  <div ng-show="!$first" class="modal-content" title="{{ window.id }}">
-    <div class="mylife-overlay" ng-show="!$last"></div>
-    <div class="modal-header">
-      <button ng-click="manager.close()" class="close">x</button>
-      <h4 class="modal-title">{{ window.id }}</h4>
-    </div>
-    <div class="modal-body">
-      <div ng-include="'views/window-content.html'" size="window.size" class="mylife-window-container"></div>
+  <div ng-show="!$first" class="modal-dialog">
+    <div class="modal-content" title="{{ window.id }}">
+      <div class="mylife-overlay" ng-show="!$last"></div>
+      <div class="modal-header">
+        <button ng-click="manager.close()" class="close">x</button>
+        <h4 class="modal-title">{{ window.id }}</h4>
+      </div>
+      <div class="modal-body">
+        <div ng-include="'views/window-content.html'" size="window.size" class="mylife-window-container"></div>
+      </div>
     </div>
   </div>
 </div>
