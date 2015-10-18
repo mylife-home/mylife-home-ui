@@ -1,22 +1,18 @@
 <!-- TODO display properly (bg position, control position, remove list) -->
-<ul>
-  <li ng-repeat="control in window.controls">
-
-    <div title="{{ control.id }}"
-         size="control.size"
-         ng-class="{
-           'mylife-control-button': utils.isControlActive(control),
-           'mylife-control-inactive': !utils.isControlActive(control)
-         }"
-         input-handler="{
-           's': control.primaryAction.execute,
-           'l': control.secondaryAction.execute,
-           'ss': control.secondaryAction.execute
-         }">
-      <img ng-show="control.display" src="{{ control.display }}">
-      <p ng-show="control.text">{{ control.text }}</p>
-    </div>
-  </li>
-
-  <img src="{{ window.background }}">
-</ul>
+<img src="{{ window.background }}">
+<div ng-repeat="control in window.controls"
+     title="{{ control.id }}"
+     size="control.size"
+     position="control.position"
+     ng-class="{
+       'mylife-control-button': utils.isControlActive(control),
+       'mylife-control-inactive': !utils.isControlActive(control)
+     }"
+     input-handler="{
+       's': control.primaryAction.execute,
+       'l': control.secondaryAction.execute,
+       'ss': control.secondaryAction.execute
+     }">
+  <img ng-show="control.display" src="{{ control.display }}">
+  <p ng-show="control.text">{{ control.text }}</p>
+</div>

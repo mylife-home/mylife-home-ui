@@ -294,9 +294,9 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       const w = {
         spec       : spec,
         id         : spec.id,
-
-        height          : spec.height, // TODO: handle undefined
-        width           : spec.width, // TODO: handle undefined
+        size       : { height:600, width: 600}, // TODO
+        //height   : spec.height, // TODO: handle undefined
+        //width    : spec.width, // TODO: handle undefined
         background : null,
         controls   : []
       };
