@@ -65,9 +65,12 @@ Format données fenêtre
 
 import async from 'async';
 
-angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.data', 'mylife-home-ui.components.repository'])
+angular.module('mylife-home-ui.components.window', [
+  'mylife-home-ui.components.data', 'mylife-home-ui.components.repository', 'mylife-home-ui.components.image'])
 
-.factory('windowManager', function(resources, socket, repository, $location) {
+.factory('windowManager', function($location, $window, resources, socket, repository, image) {
+
+  const DEFAULT_SIZE = { width: 800, height: 600 };
 
   // ------------- Window management part ---------------------
 
@@ -294,22 +297,49 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       const spec = JSON.parse(data).window;
 
       const w = {
-        spec       : spec,
-        id         : spec.id,
-        background : null,
-        controls   : []
+        spec           : spec,
+        id             : spec.id,
+        background     : null,
+        controls       : [],
+        backgroundMeta : null
       };
 
       if(w.spec.background_resource_id) {
-        loadImage(w.spec.background_resource_id, (img) => w.background = img);
+        loadImage(w.spec.background_resource_id, (img) => {
+          w.background = img;
+          image.meta(img, (meta) => {
+            w.backgroundMeta = meta;
+          });
+        });
       }
 
       if(spec.height && spec.width) {
         w.size = { height: spec.height, width: spec.width };
       } else {
         Object.defineProperty(w, 'size', { get : () => {
-          // TODO
-          return { height: 600, width: 600 };
+
+          const meta = w.backgroundMeta;
+          if(!meta) { return DEFAULT_SIZE; }
+          const windowSize = {
+            width: $window.innerWidth || $window.clientWidth,
+            height: $window.innerHeight || $window.clientHeight
+          };
+
+          const imageRatio = meta.width / meta.height;
+          const windowRatio = windowSize.width / windowSize.height;
+          let zoom;
+          if(windowRatio > imageRatio) {
+            // height-driven
+            zoom = windowSize.height / meta.height;
+          } else {
+            // width-driven
+            zoom = windowSize.width / meta.width;
+          }
+
+          return {
+            width: meta.width * zoom,
+            height: meta.height * zoom
+          };
         }});
       }
 
