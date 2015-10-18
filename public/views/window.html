@@ -1,16 +1,15 @@
 <div class="mylife-overlay" ng-show="manager.loading">
   <img src="images/spinner.gif">
 </div>
-<div ng-repeat="window in manager.windows">
+<div ng-repeat="window in manager.windows" class="mylife-window-root">
 
   <div ng-show="$first" title="{{ window.id }}">
-    <div class="mylife-overlay" ng-show="!$last" ng-click="manager.close()"></div>
     <div ng-include="'views/window-content.html'" size="window.size" class="mylife-window-container"></div>
   </div>
 
+  <div class="mylife-overlay" ng-show="!$first" ng-click="manager.close()"></div>
   <div ng-show="!$first" class="modal-dialog">
     <div class="modal-content" title="{{ window.id }}">
-      <div class="mylife-overlay" ng-show="!$last" ng-click="manager.close()"></div>
       <div class="modal-header">
         <button ng-click="manager.close()" class="close">x</button>
         <h4 class="modal-title">{{ window.id }}</h4>
