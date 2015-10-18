@@ -10,7 +10,7 @@ angular.module('mylife-home-ui.components.layout', [])
       scope.$watch(attrs.size, (value) => {
         element.css('height', value.height + 'px');
         element.css('width', value.width + 'px');
-      });
+      }, true);
     }
   };
 })
@@ -20,10 +20,10 @@ angular.module('mylife-home-ui.components.layout', [])
     restrict: 'A',
     link: function(scope, element, attrs){
 
-      scope.$watch(attrs.size, (value) => {
-        element.css('x', value.left + 'px');
-        element.css('y', value.top + 'px');
-      });
+      scope.$watch(attrs.position, (value) => {
+        element.css('left', value.x + 'px');
+        element.css('top', value.y + 'px');
+      }, true);
     }
   };
 });

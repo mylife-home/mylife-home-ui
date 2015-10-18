@@ -282,8 +282,10 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         Object.defineProperty(c, 'text', { get : loadText(spec.text) });
 
         Object.defineProperty(c, 'position',  { get : () => {
-          // TOOD
-          return { x: 0, y : 0 };
+          return {
+            x : (window.size.width * c.spec.x) - (c.size.width / 2),
+            y : (window.size.height * c.spec.y) - (c.size.height / 2)
+          };
         }});
 
         return c;
