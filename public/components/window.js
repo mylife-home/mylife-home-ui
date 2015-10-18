@@ -281,7 +281,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         Object.defineProperty(c, 'display', { get : loadDisplay(spec.display) });
         Object.defineProperty(c, 'text', { get : loadText(spec.text) });
 
-        Object.defineProperty(c, 'position',  { get : () => {
+        Object.defineProperty(c, 'position', { get : () => {
           return {
             x : (window.size.width * c.spec.x) - (c.size.width / 2),
             y : (window.size.height * c.spec.y) - (c.size.height / 2)
@@ -296,15 +296,21 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       const w = {
         spec       : spec,
         id         : spec.id,
-        size       : { height:600, width: 600}, // TODO
-        //height   : spec.height, // TODO: handle undefined
-        //width    : spec.width, // TODO: handle undefined
         background : null,
         controls   : []
       };
 
       if(w.spec.background_resource_id) {
         loadImage(w.spec.background_resource_id, (img) => w.background = img);
+      }
+
+      if(spec.height && spec.width) {
+        w.size = { height: spec.height, width: spec.width };
+      } else {
+        Object.defineProperty(w, 'size', { get : () => {
+          // TODO
+          return { height: 600, width: 600 };
+        }});
       }
 
       for(let ctrlSpec of spec.controls) {
