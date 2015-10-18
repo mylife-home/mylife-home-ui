@@ -14,7 +14,7 @@
     <div class="mylife-overlay" ng-show="!$last"></div>
     <div class="modal-header">
       <button ng-click="manager.close()" class="close">x</button>
-      <h4 class="modal-title">&nbsp;</h4>
+      <h4 class="modal-title">{{ window.id }}</h4>
     </div>
     <div class="modal-body">
       <div ng-include="'views/window-content.html'"></div>
