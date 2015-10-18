@@ -4,14 +4,14 @@ angular.module('mylife-home-ui.components.image', [])
 
 .factory('image', function($rootScope) {
   return {
-    getMeta: function(url, done) {
+    meta: function(url, done) {
       const img = new Image();
-      img.on('load', () => {
+      img.addEventListener('load', () => {
         $rootScope.$apply(() => {
-          return {
+          done({
             width: img.naturalWidth,
-            height: thimgis.naturalHeight
-          };
+            height: img.naturalHeight
+          });
         });
       });
       img.src = url;
