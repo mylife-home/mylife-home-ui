@@ -3,13 +3,10 @@
   <li ng-repeat="control in window.controls">
 
     <div title="{{ control.id }}"
+         size="control.size"
          ng-class="{
            'mylife-control-button': utils.isControlActive(control),
            'mylife-control-inactive': !utils.isControlActive(control)
-         }"
-         ng-style="{
-           'height': control.height + 'px',
-           'width': control.width + 'px'
          }"
          input-handler="{
            's': control.primaryAction.execute,

@@ -267,15 +267,11 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
         };
       }
 
-      function loadControl(spec) {
+      function loadControl(window, spec) {
         const c = {
-          spec : spec,
-          id   : spec.id,
-
-          height          : spec.height,
-          width           : spec.width,
-          x               : 0, // TODO: ratio
-          y               : 0, // TODO: ratio
+          spec            : spec,
+          id              : spec.id,
+          size            : { height: spec.height, width: spec.width },
           primaryAction   : loadAction(spec.primary_action),
           secondaryAction : loadAction(spec.secondary_action),
           display         : null,
@@ -284,6 +280,11 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
 
         Object.defineProperty(c, 'display', { get : loadDisplay(spec.display) });
         Object.defineProperty(c, 'text', { get : loadText(spec.text) });
+
+        Object.defineProperty(c, 'position',  { get : () => {
+          // TOOD
+          return { x: 0, y : 0 };
+        }});
 
         return c;
       }
@@ -305,7 +306,7 @@ angular.module('mylife-home-ui.components.window', ['mylife-home-ui.components.d
       }
 
       for(let ctrlSpec of spec.controls) {
-        const c = loadControl(ctrlSpec);
+        const c = loadControl(w, ctrlSpec);
         w.controls.push(c);
       }
 
