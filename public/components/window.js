@@ -209,7 +209,7 @@ angular.module('mylife-home-ui.components.window', [
         if(!spec.map.length) {
           itemFinder = () => null;
         }
-        else if(spec.map[0].hasOwnProperty('value')) {
+        else if(typeof(spec.map[0].value) === 'string') {
           itemFinder = (value) => {
             for(let item of spec.map) {
               if(item.value === value) {
