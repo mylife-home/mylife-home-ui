@@ -29,5 +29,8 @@ node_modules
 # bower components
 public/bower_components/
 
+#jspm packages
+public/jspm_packages/
+
 # less is used, no css
 public/*.css

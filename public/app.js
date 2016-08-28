@@ -1,5 +1,8 @@
 'use strict';
 
+import 'bootstrap-less/bootstrap/bootstrap.less!';
+import './app.less!';
+
 import 'angular';
 import 'angular-route';
 import 'angular-bootstrap';
