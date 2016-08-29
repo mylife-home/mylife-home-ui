@@ -7,9 +7,7 @@
   <script src="config.js"></script>
 
   <script>
-    System.import('app.js').then(function() {
-      angular.bootstrap(document, ['mylife-home-ui']);
-    });
+    System.import('app.js').catch(console.error.bind(console));
   </script>
   <title>MyLife Home UI</title>
 </head>

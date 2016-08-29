@@ -30,3 +30,7 @@ angular.module('mylife-home-ui', [
     $location.url('/' + windowManager.defaultWindowId);
   });
 });
+
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['mylife-home-ui']);
+});
