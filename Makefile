@@ -20,4 +20,4 @@ start:
 	$(NODE) bin/server.js
 
 bundle:
-	$(JSPM) bundle app public/build.js
+	$(JSPM) bundle app public/build.js --inject
