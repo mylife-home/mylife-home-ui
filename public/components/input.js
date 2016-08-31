@@ -1,4 +1,5 @@
 'use strict';
+'format es6';
 
 angular.module('mylife-home-ui.components.input', [])
 

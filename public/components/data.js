@@ -1,4 +1,5 @@
 'use strict';
+'format es6';
 
 import io from 'socket.io-client';
 

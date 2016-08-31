@@ -12,14 +12,6 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-  meta: {
-    './components/*.js': {
-      format: 'esm'
-    },
-    './views/*.js': {
-      format: 'esm'
-    }
-  },
 
   map: {
     "angular": "github:angular/bower-angular@1.5.8",
