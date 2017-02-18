@@ -78,9 +78,9 @@ angular.module('mylife-home-ui.components.window', [
   const cachedWindows = { };
 
   const manager = {
-    defaultWindowId : null,
-    windows         : [],
-    loading         : false
+    defaultWindows : {},
+    windows        : [],
+    loading        : false
   };
 
   function load(windowId, done) {
@@ -96,7 +96,7 @@ angular.module('mylife-home-ui.components.window', [
   manager.init = function(done) {
     manager.loading = true;
     resources.load('default_window', function(data) {
-      manager.defaultWindowId = data;
+      manager.defaultWindows = JSON.parse(data);
       manager.loading = false;
       done();
     });
