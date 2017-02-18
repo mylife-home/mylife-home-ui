@@ -13,7 +13,7 @@ import './components/input.js';
 import './components/layout.js';
 import './components/image.js';
 import './views/window.js';
-import './utils/wurfl.js';
+import browser from './utils/detect-browser.js';
 
 angular.module('mylife-home-ui', [
   'ngRoute',
@@ -28,7 +28,7 @@ angular.module('mylife-home-ui', [
 
 .run(function($location, windowManager) {
   windowManager.init(function() {
-    const defaultWindow = WURFL.is_mobile ? 'mobile' : 'desktop';
+    const defaultWindow = browser.isMobile ? 'mobile' : 'desktop';
     $location.url('/' + windowManager.defaultWindows[defaultWindow]);
   });
 });
