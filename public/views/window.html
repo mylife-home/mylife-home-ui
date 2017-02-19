@@ -1,6 +1,7 @@
 <div class="mylife-overlay" ng-show="manager.loading">
   <img src="images/spinner.gif">
 </div>
+<div viewport-size="manager.windows[0].size"></div>
 <div ng-repeat="window in manager.windows" class="mylife-window-root">
 
   <div ng-show="$first" title="{{ window.id }}">

@@ -1,9 +1,6 @@
 'use strict';
 'format es6';
 
-import browser from '../utils/detect-browser.js';
-import viewport from '../utils/viewport.js';
-
 /*
 
 Format données fenêtre
@@ -116,12 +113,6 @@ angular.module('mylife-home-ui.components.window', [
     return load(windowId, function(w) {
       manager.windows.length = 0;
       manager.windows.push(w);
-
-      if(browser.isMobile) {
-        const size = w.size;
-        viewport.setDimensions(size.width, size.height);
-      }
-
       done(w);
     });
   };
