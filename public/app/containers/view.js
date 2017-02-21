@@ -14,7 +14,7 @@ const mapStateToProps = () => {
   });
 };
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = (dispatch) => ({
   onActionPrimary   : ({ window, component }) => dispatch(actionPrimary({ window, component })),
   onActionSecondary : ({ window, component }) => dispatch(actionSecondary({ window, component })),
   onWindowClose     : () => dispatch(windowClose())

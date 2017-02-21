@@ -1,6 +1,5 @@
 'use strict';
 
-import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 
 export const getWindows = (state) => state.windows;
