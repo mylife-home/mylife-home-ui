@@ -1,6 +1,6 @@
 BIN         = ./node_modules/.bin
 MOCHA       = $(BIN)/mocha
-JSHINT      = $(BIN)/jshint
+ESLINT      = $(BIN)/eslint
 JSPM        = $(BIN)/jspm
 NODE        = node
 MOCHA_OPTS  = --timeout 2000 --recursive -b
@@ -8,16 +8,13 @@ REPORTER    = spec
 TEST_FILES  = test
 
 lint:
-	$(JSHINT) lib/* test/*
+	$(ESLINT) lib/* public/app/*
 
-test: lint
-	$(MOCHA) $(MOCHA_OPTS) --reporter $(REPORTER) $(TEST_FILES)
-
-test-silent:
-	$(MOCHA) $(MOCHA_OPTS) -b --reporter dot $(TEST_FILES)
+start-dev:
+	$(NODE) bin/server.js --dev
 
 start:
 	$(NODE) bin/server.js
 
 bundle:
-	$(JSPM) bundle app public/build.js --inject
+	$(BIN)/webpack -d
