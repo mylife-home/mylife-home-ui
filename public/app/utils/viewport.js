@@ -1,5 +1,4 @@
 'use strict';
-'format es6';
 
 /** Steven Yang, July 2016
 Based on http://stackoverflow.com/questions/21419404/setting-the-viewport-to-scale-to-fit-both-width-and-height , this Javascript code allows you to
@@ -22,21 +21,21 @@ function insertViewport() {
     return;
 
   const viewPortTag = document.createElement('meta');
-  viewPortTag.id="viewport";
-  viewPortTag.name = "viewport";
-  viewPortTag.content = "width=max-device-width, height=max-device-height,initial-scale=1.0";
+  viewPortTag.id      ='viewport';
+  viewPortTag.name    = 'viewport';
+  viewPortTag.content = 'width=max-device-width, height=max-device-height,initial-scale=1.0';
   document.getElementsByTagName('head')[0].appendChild(viewPortTag);
 }
 
 function isPortraitOrientation() {
   switch(window.orientation) {
-  case -90:
-  case 90:
-  return false;
+    case -90:
+    case 90:
+      return false;
   }
 
   return true;
- }
+}
 
 function getDisplayWidth() {
   if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -71,13 +70,13 @@ function adjustViewport(requiredWidth, requiredHeight) {
     const minHeight    = requiredHeight;
     const ratio        = Math.min(actualWidth / minWidth, actualHeight / minHeight);
 
-    console.log(`setting viewport width=${actualWidth} ratio=${ratio}`);
+    console.log(`setting viewport width=${actualWidth} ratio=${ratio}`); // eslint-disable-line no-console
     document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + ratio + ', maximum-scale=' + ratio + ', minimum-scale=' + ratio + ', user-scalable=yes, width=' + actualWidth);
   }
 }
 
 function setDimensions(requiredWidth, requiredHeight) {
-  console.log(`viewport set dimensions: width=${requiredWidth}, heigth=${requiredHeight}`);
+  console.log(`viewport set dimensions: width=${requiredWidth}, heigth=${requiredHeight}`); // eslint-disable-line no-console
   insertViewport();
   adjustViewport(requiredWidth, requiredHeight);
   window.addEventListener('orientationchange', function() {
