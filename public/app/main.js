@@ -2,23 +2,28 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import immutableStateInvariant from 'redux-immutable-state-invariant'; // FIXME: remove immutableStateInvariant in production
-import { Provider } from 'react-redux';
+import immutableStateInvariant from 'redux-immutable-state-invariant';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-import dataService from './services/data-service';
-import { getAccounts, getGroups } from './actions/common';
-import { getOperations } from './actions/management';
-import Application from './components/application';
+import socketMiddleware from './middlewares/socket';
+import resourcesMiddleware from './middlewares/resources';
+import navigationMiddleware from './middlewares/navigation';
 import reducer from './reducers/index';
 
-// TODO: use it where required
-import css from '../app.less';
+import Application from './components/application';
+import Bootstrap from './components/bootstrap';
+import View from './containers/view';
 
+import { windowsInit } from './actions/windows';
+
+import /*css from*/ '../app.less';
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -28,12 +33,21 @@ injectTapEventPlugin();
 
 const store = createStore(
   reducer,
-  applyMiddleware(dataService, immutableStateInvariant(), thunk, createLogger())
+  applyMiddleware(navigationMiddleware, socketMiddleware, resourcesMiddleware, routerMiddleware(hashHistory), immutableStateInvariant(), thunk, createLogger())
 );
+
+const history = syncHistoryWithStore(hashHistory, store);
+
+store.dispatch(windowsInit());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Application/>
+    <Router history={history}>
+        <Route path="/" component={Application}>
+          <IndexRoute component={Bootstrap} />
+          <Route path=":window" component={View} />
+        </Route>
+      </Router>
   </Provider>,
   document.getElementById('content')
 );
