@@ -1,6 +1,6 @@
 'use strict';
 
-import { windowNavigationChange } from '../actions/windows';
+import { viewNavigationChange } from '../actions/view';
 
 const middleware = (/*store*/) => next => action => {
   next(action);
@@ -9,7 +9,7 @@ const middleware = (/*store*/) => next => action => {
     case '@@router/LOCATION_CHANGE': {
       let { pathname } = action.payload;
       pathname = pathname.substr(1);
-      return pathname && next(windowNavigationChange(pathname));
+      return pathname && next(viewNavigationChange(pathname));
     }
   }
 };

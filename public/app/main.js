@@ -20,7 +20,7 @@ import Application from './components/application';
 import Bootstrap from './components/bootstrap';
 import View from './containers/view';
 
-import { windowsInit } from './actions/windows';
+import { viewInit } from './actions/view';
 
 import /*css from*/ '../app.less';
 
@@ -37,7 +37,7 @@ const store = createStore(
 
 const history = syncHistoryWithStore(hashHistory, store);
 
-store.dispatch(windowsInit());
+store.dispatch(viewInit());
 
 ReactDOM.render(
   <Provider store={store}>
@@ -50,3 +50,10 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('content')
 );
+
+/*
+  TODO:
+   - popups
+   - input handler
+   - viewport
+*/
