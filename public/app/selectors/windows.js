@@ -8,10 +8,38 @@ import { getRepository } from './repository';
 export const getWindows = (state) => state.windows;
 export const getWindow = (state) => state.windows;
 
+function findDisplayItem(map, value) {
+  if(typeof map.get(0).value === 'string') {
+    for(const item of map) {
+      if(item.value === value) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  value = parseInt(value);
+  for(const item of map) {
+    if(item.min <= value && value <= item.max) {
+      return item;
+    }
+  }
+  return null;
+}
+
 function prepareDisplay(resources, repository, display) {
   if(!display) { return null; }
 
-  return resources.get(display.resource);
+  const defaultResource = resources.get(display.resource);
+
+  if(!display.component || !display.map || !display.map.size) { return defaultResource; }
+  const component = repository.get(display.component);
+  if(!component || !component.has(display.attribute)) { return defaultResource; }
+  const value = component.get(display.attribute);
+  const item = findDisplayItem(display.map, value);
+  if(!item) { return defaultResource; }
+
+  return resources.get(item.resource);
 }
 
 function prepareText(resources, repository, text) {
