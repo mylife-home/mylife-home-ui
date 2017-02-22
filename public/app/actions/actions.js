@@ -3,14 +3,14 @@
 import { createAction } from 'redux-actions';
 import { actionTypes } from '../constants';
 import { getWindowControl } from '../selectors/windows';
-import { windowChange, windowPopup } from './windows';
+import { viewChange, viewPopup } from './view';
 
 const actionComponent  = createAction(actionTypes.ACTION_COMPONENT);
 
 
 function dispatchAction(dispatch, action) {
   if(action.window) {
-    return dispatch((action.popup ? windowPopup : windowChange)(action.window));
+    return dispatch((action.popup ? viewPopup : viewChange)(action.window));
   }
 
   if(action.component) {
@@ -24,18 +24,3 @@ function dispatchAction(dispatch, action) {
 
 export const actionPrimary   = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).primaryAction);
 export const actionSecondary = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).secondaryAction);
-/*
-
-  ACTION_COMPONENT     : null,
-
-{
-  id   : cspec.component_id,
-  name : cspec.component_action
-  //args :[]
-}
-
-
-  ACTION_WINDOW_CHANGE : null,
-  ACTION_WINDOW_POPUP  : null,
-
-*/

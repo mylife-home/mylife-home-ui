@@ -76,16 +76,11 @@ function createWindow(raw) {
 
 export default handleActions({
 
-  [actionTypes.WINDOWS_POPUP] : {
-    next : (state, action) => state.push(createWindow(action.payload))
-  },
-
-  [actionTypes.WINDOWS_CLOSE] : {
-    next : (state/*, action*/) => state.pop()
-  },
-
-  [actionTypes.WINDOWS_CHANGE] : {
-    next : (state, action) => state.clear().push(createWindow(action.payload))
+  [actionTypes.WINDOW_NEW] : {
+    next : (state, action) => {
+      const window = createWindow(action.payload);
+      return state.set(window.id, window);
+    }
   }
 
-}, Immutable.List());
+}, Immutable.Map());

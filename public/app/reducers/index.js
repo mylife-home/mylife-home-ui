@@ -5,6 +5,7 @@ import errors from './errors';
 import online from './online';
 import repository from './repository';
 import resources from './resources';
+import view from './view';
 import windows from './windows';
 
 export default combineReducers({
@@ -12,6 +13,7 @@ export default combineReducers({
   online,
   repository,
   resources,
+  view,
   windows,
   routing: routerReducer
 });

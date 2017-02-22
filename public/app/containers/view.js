@@ -1,23 +1,20 @@
 'use strict';
 
 import { connect } from 'react-redux';
-import { makeGetWindowStack } from '../selectors/windows';
+import { getViewDisplay } from '../selectors/view';
 import { actionPrimary, actionSecondary } from '../actions/actions';
-import { windowClose } from '../actions/windows';
+import { viewClose } from '../actions/view';
 
 import Window from '../components/window';
 
-const mapStateToProps = () => {
-  const getWindowStack = makeGetWindowStack();
-  return (state, props) => ({
-    stack : getWindowStack(state, props)
-  });
-};
+const mapStateToProps = () => (state, props) => ({
+  view : getViewDisplay(state, props)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onActionPrimary   : (window, component) => dispatch(actionPrimary(window, component)),
   onActionSecondary : (window, component) => dispatch(actionSecondary(window, component)),
-  onWindowClose     : () => dispatch(windowClose())
+  onWindowClose     : () => dispatch(viewClose())
 });
 
 const View = connect(

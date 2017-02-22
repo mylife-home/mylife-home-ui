@@ -1,13 +1,12 @@
 'use strict';
 
-import { createSelector } from 'reselect';
-
 import { getResources } from './resources';
 import { getRepository } from './repository';
 
 export const getWindows       = (state) => state.windows;
-export const getWindow        = (state, { window }) => getWindows(state).filter(w => w.id === window).first();
+export const getWindow        = (state, { window }) => getWindows(state).get(window);
 export const getWindowControl = (state, props) => getWindow(state, props).controls.get(props.control);
+export const getWindowDisplay = (state, props) => prepareWindow(getResources(state), getRepository(state), getWindow(state, props));
 
 function findDisplayItem(map, value) {
   if(typeof map.get(0).value === 'string') {
@@ -81,16 +80,3 @@ function prepareWindow(resources, repository, window) {
   };
 }
 
-export const makeGetWindowStack = () => createSelector(
-  [ getWindows, getResources, getRepository ],
-  (windows, resources, repository) => {
-    let parent, root;
-    for(const window of windows) {
-      const current = { window : prepareWindow(resources, repository, window) };
-      if(!root) { root = current;}
-      if(parent) { parent.popup = current; }
-      parent = current;
-    }
-    return root;
-  }
-);

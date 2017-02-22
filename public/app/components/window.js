@@ -4,9 +4,9 @@ import React from 'react';
 
 import WindowContent from './window-content';
 
-const Window = ({ stack, onActionPrimary, onActionSecondary, onWindowClose }) => (
-  stack ? (
-    <WindowContent window={stack.window} onActionPrimary={onActionPrimary} onActionSecondary={onActionSecondary} />
+const Window = ({ view, onActionPrimary, onActionSecondary, onWindowClose }) => (
+  view ? (
+    <WindowContent window={view.window} onActionPrimary={onActionPrimary} onActionSecondary={onActionSecondary} />
   ) : (
     <div className="mylife-overlay">
       <img src="images/spinner.gif" />
@@ -15,7 +15,7 @@ const Window = ({ stack, onActionPrimary, onActionSecondary, onWindowClose }) =>
 );
 
 Window.propTypes = {
-  stack             : React.PropTypes.object,
+  view              : React.PropTypes.object,
   onActionPrimary   : React.PropTypes.func.isRequired,
   onActionSecondary : React.PropTypes.func.isRequired,
   onWindowClose     : React.PropTypes.func.isRequired,
