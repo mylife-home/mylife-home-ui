@@ -67,7 +67,7 @@ function loadWindowAndDispatch(dispatch, id, action) {
 
     // load all associated resources
     const resources = new Set();
-    addImage(window.background_resource_id);
+    addImage(resources, window.background_resource_id);
     for(const control of window.controls) {
       const display = control.display;
       if(!display) { continue; }
