@@ -28,7 +28,7 @@ function createText(raw) {
   try {
     func = new Function(argNames, format);
   } catch(err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
     func = () => err.message;
   }
 

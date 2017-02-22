@@ -53,7 +53,7 @@ function prepareText(resources, repository, text) {
   try {
     return text.func.apply(null, args);
   } catch(err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
     return err.message;
   }
 }
