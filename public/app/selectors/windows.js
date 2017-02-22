@@ -5,8 +5,9 @@ import { createSelector } from 'reselect';
 import { getResources } from './resources';
 import { getRepository } from './repository';
 
-export const getWindows = (state) => state.windows;
-export const getWindow = (state) => state.windows;
+export const getWindows       = (state) => state.windows;
+export const getWindow        = (state, { window }) => getWindows(state).filter(w => w.id === window).first();
+export const getWindowControl = (state, props) => getWindow(state, props).controls.get(props.control);
 
 function findDisplayItem(map, value) {
   if(typeof map.get(0).value === 'string') {
