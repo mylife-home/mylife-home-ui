@@ -4,17 +4,9 @@ import { handleActions } from 'redux-actions';
 import { actionTypes } from '../constants/index';
 import Immutable from 'immutable';
 
-function createState(raw) {
-  return Immutable.Map().withMutations(map => {
-    for(const id in Object.keys(raw)) {
-      map.set(id, createAttributes(raw[id]));
-    }
-  });
-}
-
 function createAttributes(raw) {
   return Immutable.Map().withMutations(map => {
-    for(const name in Object.keys(raw)) {
+    for(const name of Object.keys(raw)) {
       map.set(name, raw[name]);
     }
   });
@@ -23,7 +15,11 @@ function createAttributes(raw) {
 export default handleActions({
 
   [actionTypes.REPOSITORY_STATE] : {
-    next : (state, action) => state.clear().set(createState(action.payload))
+    next : (state, action) => state.clear().withMutations(map => {
+      for(const id of Object.keys(action.payload)) {
+        map.set(id, createAttributes(action.payload[id]));
+      }
+    })
   },
 
   [actionTypes.REPOSITORY_ADD] : {
