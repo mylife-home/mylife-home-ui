@@ -2,9 +2,28 @@
 
 import { createAction } from 'redux-actions';
 import { actionTypes } from '../constants';
+import { getWindowControl } from '../selectors/windows';
+import { windowChange, windowPopup } from './windows';
 
-export const actionPrimary = (window, control) => console.log('actionPrimary', window, control);
-export const actionSecondary = (window, control) => console.log('actionSecondary', window, control);
+const actionComponent  = createAction(actionTypes.ACTION_COMPONENT);
+
+
+function dispatchAction(dispatch, action) {
+  if(action.window) {
+    return dispatch((action.popup ? windowPopup : windowChange)(action.window));
+  }
+
+  if(action.component) {
+    return dispatch(actionComponent({
+      id   : action.component,
+      name : action.action
+      //args :[]
+    }));
+  }
+}
+
+export const actionPrimary   = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).primaryAction);
+export const actionSecondary = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).secondaryAction);
 /*
 
   ACTION_COMPONENT     : null,

@@ -21,7 +21,5 @@ export default wrap({
   WINDOWS_CHANGE       : null,
 
   ACTION_COMPONENT     : null,
-  ACTION_WINDOW_CHANGE : null,
-  ACTION_WINDOW_POPUP  : null,
 });
 
