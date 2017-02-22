@@ -14,6 +14,7 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import socketMiddleware from './middlewares/socket';
 import resourcesMiddleware from './middlewares/resources';
 import navigationMiddleware from './middlewares/navigation';
+import viewportMiddleware from './middlewares/viewport';
 import reducer from './reducers/index';
 
 import Application from './components/application';
@@ -32,7 +33,7 @@ injectTapEventPlugin();
 
 const store = createStore(
   reducer,
-  applyMiddleware(navigationMiddleware, socketMiddleware, resourcesMiddleware, routerMiddleware(hashHistory), thunk, createLogger())
+  applyMiddleware(viewportMiddleware, navigationMiddleware, socketMiddleware, resourcesMiddleware, routerMiddleware(hashHistory), thunk, createLogger())
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
