@@ -13,7 +13,7 @@ const internalWindowsPopup  = createAction(actionTypes.WINDOWS_POPUP);
 const internalWindowsClose  = createAction(actionTypes.WINDOWS_CLOSE);
 const internalWindowsChange = createAction(actionTypes.WINDOWS_CHANGE);
 
-function getDefaultWindowByPath(state) {
+function getPathWindow(state) {
   const routingState = state.routing.locationBeforeTransitions;
   if(!routingState) { return null; }
   let { pathname } = routingState;
@@ -21,7 +21,7 @@ function getDefaultWindowByPath(state) {
   return pathname;
 }
 
-function getDefaultWindowByConfig(dispatch, done) {
+function getDefaultWindow(dispatch, done) {
   return dispatch(resourceQuery({ resource: 'default_window', done: (err, data) => {
     if(err) { return done(err); } // eslint-disable-line no-console
     const windows = JSON.parse(data);
@@ -29,15 +29,14 @@ function getDefaultWindowByConfig(dispatch, done) {
   }}));
 }
 
-function getDefaultWindow(dispatch, state, done) {
-  let defaultWindow = getDefaultWindowByPath(state);
-  if(defaultWindow) { return done(null, defaultWindow); }
-  return getDefaultWindowByConfig(dispatch, done);
-}
-
 export const windowsInit = () => (dispatch, getState) => {
   const state = getState();
-  return getDefaultWindow(dispatch, state, (err, defaultWindow) => {
+  if(getPathWindow(state)) {
+    console.log('window already opened, not using default window'); // eslint-disable-line no-console
+    return;
+  }
+
+  return getDefaultWindow(dispatch, (err, defaultWindow) => {
     if(err) { return console.error(err); } // eslint-disable-line no-console
 
     console.log(`using default window: ${defaultWindow}`); // eslint-disable-line no-console
