@@ -45,7 +45,17 @@ function prepareDisplay(resources, repository, display) {
 function prepareText(resources, repository, text) {
   if(!text) { return null; }
 
-  return 'toto';
+  const args = text.context.map(item => {
+    const component = repository.get(item.component);
+    return component && component.get(item.attribute);
+  }).toArray();
+
+  try {
+    return text.func.apply(null, args);
+  } catch(err) {
+    console.error(err);
+    return err.message;
+  }
 }
 
 function prepareControl(resources, repository, window, control) {

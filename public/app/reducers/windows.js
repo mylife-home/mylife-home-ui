@@ -21,12 +21,24 @@ function createDisplay(raw) {
 
 function createText(raw) {
   if(!raw) { return null; }
-  const { context, ...others } = raw;
+  const { context, format, ...others } = raw;
+
+  const argNames = context.map(item => item.id).join(',');
+  let func;
+  try {
+    func = new Function(argNames, format);
+  } catch(err) {
+    console.error(err);
+    func = () => err.message;
+  }
+
   return {
     context: Immutable.List(context.map(item => {
       const { component_id, component_attribute, ...others } = item;
       return { component : component_id, attribute : component_attribute, ...others };
     })),
+    format,
+    func,
     ...others
   };
 }
