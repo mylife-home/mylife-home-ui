@@ -1,5 +1,6 @@
 'use strict';
 
+import async from 'async';
 import { createAction } from 'redux-actions';
 import { push as routerPush } from 'react-router-redux';
 import { actionTypes } from '../constants';
@@ -54,11 +55,35 @@ export const windowChange = (id) => (dispatch, getState) => {
   dispatch(routerPush(pathname));
 };
 
+function addImage(resources, id) {
+  if(!id) { return; }
+  resources.add(`image.${id}`);
+}
+
 function loadWindowAndDispatch(dispatch, id, action) {
   return dispatch(resourceQuery({ resource: `window.${id}`, done: (err, data) => {
     if(err) { return console.error(err); } // eslint-disable-line no-console
-    const window = JSON.parse(data);
-    return dispatch(action(window));
+    const window = JSON.parse(data).window;
+
+    // load all associated resources
+    const resources = new Set();
+    addImage(window.background_resource_id);
+    for(const control of window.controls) {
+      const display = control.display;
+      if(!display) { continue; }
+      addImage(resources, display.default_resource_id);
+
+      const map = display.map;
+      if(!map) { continue; }
+      for(const item of map) {
+        addImage(resources, item.resource_id);
+      }
+    }
+
+    async.parallel(Array.from(resources).map(resource => done => dispatch(resourceQuery({ resource, done }))), (err) => {
+      if(err) { return console.error(err); } // eslint-disable-line no-console
+      return dispatch(action(window));
+    });
   }}));
 }
 
