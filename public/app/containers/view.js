@@ -15,8 +15,8 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onActionPrimary   : ({ window, component }) => dispatch(actionPrimary({ window, component })),
-  onActionSecondary : ({ window, component }) => dispatch(actionSecondary({ window, component })),
+  onActionPrimary   : (window, component) => dispatch(actionPrimary(window, component)),
+  onActionSecondary : (window, component) => dispatch(actionSecondary(window, component)),
   onWindowClose     : () => dispatch(windowClose())
 });
 

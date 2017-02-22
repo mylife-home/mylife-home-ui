@@ -2,9 +2,11 @@
 
 import React from 'react';
 
+import WindowContent from './window-content';
+
 const Window = ({ stack, onActionPrimary, onActionSecondary, onWindowClose }) => (
   stack ? (
-    <div>Hello window!</div>
+    <WindowContent window={stack.window} onActionPrimary={onActionPrimary} onActionSecondary={onActionSecondary} />
   ) : (
     <div className="mylife-overlay">
       <img src="images/spinner.gif" />
@@ -20,3 +22,5 @@ Window.propTypes = {
 };
 
 export default Window;
+
+// TODO: children (stack.popup)
