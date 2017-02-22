@@ -3,8 +3,8 @@
 import { createAction } from 'redux-actions';
 import { actionTypes } from '../constants';
 
-export const actionPrimary = () => console.log('actionPrimary');
-export const actionSecondary = () => console.log('actionSecondary');
+export const actionPrimary = (window, control) => console.log('actionPrimary', window, control);
+export const actionSecondary = (window, control) => console.log('actionSecondary', window, control);
 /*
 
   ACTION_COMPONENT     : null,
