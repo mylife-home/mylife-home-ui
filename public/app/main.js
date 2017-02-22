@@ -9,7 +9,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import immutableStateInvariant from 'redux-immutable-state-invariant';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
 import socketMiddleware from './middlewares/socket';
@@ -33,7 +32,7 @@ injectTapEventPlugin();
 
 const store = createStore(
   reducer,
-  applyMiddleware(navigationMiddleware, socketMiddleware, resourcesMiddleware, routerMiddleware(hashHistory), immutableStateInvariant(), thunk, createLogger())
+  applyMiddleware(navigationMiddleware, socketMiddleware, resourcesMiddleware, routerMiddleware(hashHistory), thunk, createLogger())
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
