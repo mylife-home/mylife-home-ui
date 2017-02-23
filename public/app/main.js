@@ -55,5 +55,4 @@ ReactDOM.render(
 /*
   TODO:
    - popups
-   - input handler
 */
