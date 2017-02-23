@@ -51,8 +51,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('content')
 );
-
-/*
-  TODO:
-   - popups
-*/
