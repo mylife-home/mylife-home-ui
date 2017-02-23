@@ -2,13 +2,15 @@
 
 import { connect } from 'react-redux';
 import { getViewDisplay } from '../selectors/view';
+import { getOnline } from '../selectors/online';
 import { actionPrimary, actionSecondary } from '../actions/actions';
 import { viewClose } from '../actions/view';
 
 import Window from '../components/window';
 
 const mapStateToProps = () => (state, props) => ({
-  view : getViewDisplay(state, props)
+  online : getOnline(state, props),
+  view   : getViewDisplay(state, props)
 });
 
 const mapDispatchToProps = (dispatch) => ({
