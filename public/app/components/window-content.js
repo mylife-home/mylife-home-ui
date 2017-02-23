@@ -11,7 +11,7 @@ function getStyleSize(window) {
 
 const WindowContent = ({ window, onActionPrimary, onActionSecondary }) => (
   <div style={getStyleSize(window)} className="mylife-window-container">
-    <img src={`data:image/png;base64,${window.resource}`} />
+    <img src={window.resource && `data:image/png;base64,${window.resource}`} />
     {window.controls.map(control => (<Control key={control.id}
                                               control={control}
                                               onActionPrimary={() => onActionPrimary(window.id, control.id)}
