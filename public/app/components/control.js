@@ -32,7 +32,7 @@ class Control extends React.PureComponent {
   }
 
   render() {
-    const { control, onActionPrimary, onActionSecondary } = this.props;
+    const { control } = this.props;
 
     return (
       <div title={control.id}
@@ -47,7 +47,7 @@ class Control extends React.PureComponent {
       </div>
     );
   }
-};
+}
 
 Control.propTypes = {
   control           : React.PropTypes.object.isRequired,

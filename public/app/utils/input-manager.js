@@ -10,7 +10,7 @@ class InputManager {
   }
 
   executeEvents() {
-    console.log(`InputManager: execute events : '${this.eventStack}'`);
+    console.log(`InputManager: execute events : '${this.eventStack}'`); // eslint-disable-line no-console
 
     const fn = this.config[this.eventStack];
     fn && fn();
@@ -63,6 +63,6 @@ class InputManager {
       this.endWait = null;
     }, 300);
   }
-};
+}
 
 export default InputManager;
