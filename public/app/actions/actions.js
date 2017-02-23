@@ -9,6 +9,8 @@ const actionComponent  = createAction(actionTypes.ACTION_COMPONENT);
 
 
 function dispatchAction(dispatch, action) {
+  if(!action) { return; }
+
   if(action.window) {
     return dispatch((action.popup ? viewPopup : viewChange)(action.window));
   }
