@@ -1,19 +1,15 @@
+'use strict';
+
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-
-import errors from './errors';
-import online from './online';
-import repository from './repository';
-import resources from './resources';
-import view from './view';
-import windows from './windows';
+import { reducers } from 'mylife-home-ui-common';
 
 export default combineReducers({
-  errors,
-  online,
-  repository,
-  resources,
-  view,
-  windows,
+  errors: reducers.errors,
+  online: reducers.online,
+  repository: reducers.repository,
+  resources: reducers.resources,
+  view: reducers.view,
+  windows: reducers.windows,
   routing: routerReducer
 });

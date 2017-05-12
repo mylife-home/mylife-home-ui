@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import InputManager from '../utils/input-manager';
+import { utils } from 'mylife-home-ui-common';
 
 function getStyleSizePosition(control) {
   const { left, top, height, width } = control;
@@ -14,7 +14,7 @@ class Control extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.inputManager = new InputManager();
+    this.inputManager = new utils.InputManager();
     this.configureInputManager(props);
   }
 

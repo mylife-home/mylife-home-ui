@@ -1,12 +1,10 @@
 'use strict';
 
 import { createAction } from 'redux-actions';
-import { actionTypes } from '../constants';
-import { getWindowControl } from '../selectors/windows';
+import { constants, selectors } from 'mylife-home-ui-common';
 import { viewChange, viewPopup } from './view';
 
-const actionComponent  = createAction(actionTypes.ACTION_COMPONENT);
-
+const actionComponent = createAction(constants.actionTypes.ACTION_COMPONENT);
 
 function dispatchAction(dispatch, action) {
   if(!action) { return; }
@@ -24,5 +22,5 @@ function dispatchAction(dispatch, action) {
   }
 }
 
-export const actionPrimary   = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).primaryAction);
-export const actionSecondary = (window, control) => (dispatch, getState) => dispatchAction(dispatch, getWindowControl(getState(), { window, control }).secondaryAction);
+export const actionPrimary   = (window, control) => (dispatch, getState) => dispatchAction(dispatch, selectors.getWindowControl(getState(), { window, control }).primaryAction);
+export const actionSecondary = (window, control) => (dispatch, getState) => dispatchAction(dispatch, selectors.getWindowControl(getState(), { window, control }).secondaryAction);

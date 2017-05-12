@@ -24,6 +24,7 @@
     "less-loader": "^2.2.3",
     "log4js": "*",
     "mylife-home-common": "vincent-tr/mylife-home-common",
+    "mylife-home-ui-common": "vincent-tr/mylife-home-ui-common",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",

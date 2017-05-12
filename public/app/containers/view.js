@@ -1,16 +1,15 @@
 'use strict';
 
 import { connect } from 'react-redux';
-import { getViewDisplay } from '../selectors/view';
-import { getOnline } from '../selectors/online';
+import { selectors } from 'mylife-home-ui-common';
 import { actionPrimary, actionSecondary } from '../actions/actions';
 import { viewClose } from '../actions/view';
 
 import Window from '../components/window';
 
 const mapStateToProps = () => (state, props) => ({
-  online : getOnline(state, props),
-  view   : getViewDisplay(state, props)
+  online : selectors.getOnline(state, props),
+  view   : selectors.getViewDisplay(state, props)
 });
 
 const mapDispatchToProps = (dispatch) => ({

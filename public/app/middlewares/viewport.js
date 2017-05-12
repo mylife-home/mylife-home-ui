@@ -1,7 +1,6 @@
 'use strict';
 
-import { actionTypes } from '../constants/index';
-import { getWindow } from '../selectors/windows';
+import { constants, selectors } from 'mylife-home-ui-common';
 
 import browser from '../utils/detect-browser.js';
 import viewport from '../utils/viewport.js';
@@ -16,9 +15,9 @@ function factory() {
     next(action);
 
     switch (action.type) {
-      case actionTypes.VIEW_CHANGE: {
+      case constants.actionTypes.VIEW_CHANGE: {
         const state = store.getState();
-        const window = getWindow(state, { window : action.payload });
+        const window = selectors.getWindow(state, { window : action.payload });
         viewport.setDimensions(window.width, window.height);
       }
     }
