@@ -64,5 +64,3 @@ Window.propTypes = {
 };
 
 export default Window;
-
-// TODO: children (stack.popup)
