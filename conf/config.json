@@ -8,6 +8,7 @@
     "resources_nick" : "mylife-home-resources"
   },
   "web": {
-    "port" : 8001
+    "headerIp" : "X-Real-IP",
+    "port"     : 8001
   }
 }
