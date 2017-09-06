@@ -22,7 +22,7 @@
     "keymirror": "^0.1.1",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
-    "log4js": "*",
+    "log4js": "^1.1.1",
     "mylife-home-common": "mylife-home/mylife-home-common",
     "mylife-home-ui-common": "mylife-home/mylife-home-ui-common",
     "react": "^15.4.2",
